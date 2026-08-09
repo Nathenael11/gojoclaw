@@ -8,7 +8,8 @@ const { Client: WAClient, LocalAuth } = pkg;
 // @ts-ignore
 import qrcode from 'qrcode-terminal';
 import fs from 'fs';
-import http from 'http';
+import express from 'express';
+import * as path from 'path';
 
 // ─── SESSION MANAGEMENT ─────────────────────────────────────
 
@@ -56,6 +57,9 @@ class SessionManager {
 const sessionManager = new SessionManager();
 const runner = new InMemoryRunner({ appName: 'gojoclaw', agent: rootAgent });
 
+// Global variable to hold bot username for web interface status link
+let telegramBotUsername = 'GojoClawBot';
+
 // Helper to split long messages to prevent API failures
 function splitMessage(text: string, maxLength: number = 4000): string[] {
   if (!text) return [];
@@ -78,7 +82,7 @@ async function processMessage(userId: string, sessionId: string, text: string): 
 
     console.log(`[Message] [${sessionId}] User (${userId}): ${text}`);
 
-    // 2. Fix InMemoryRunner session not found issue
+    // 2. Ensure session exists in ADK's session service before running
     let adkSession = await runner.sessionService.getSession({
       appName: runner.appName,
       userId,
@@ -128,11 +132,11 @@ async function processMessage(userId: string, sessionId: string, text: string): 
 
   } catch (error: any) {
     console.error(`[Error] [${sessionId}] failed to process message:`, error.message);
-    return `❌ I encountered an error: ${error.message || 'Unknown error'}. Please try again.`;
+    return `❌ GojoClaw error: ${error.message || 'Unknown error'}. Please try again.`;
   }
 }
 
-console.log('\n🦞 GojoClaw Personal Assistant Gateway');
+console.log('\n🦞 GojoClaw Autonomous AI Agent Gateway');
 console.log('='.repeat(45));
 
 // ─── TELEGRAM CHANNEL ───────────────────────────────────────
@@ -158,7 +162,8 @@ if (process.env.ENABLE_TELEGRAM === 'true') {
           });
           
           await ctx.reply(
-            `🦞 Welcome to GojoClaw, ${name}!\n\n` +
+            `🦞 Welcome to GojoClaw Autonomous AI Agent, ${name}!\n\n` +
+            `Built by Nathenael Ermias\n\n` +
             `I'm your personal AI assistant. I can help you with:\n` +
             `• Running commands\n` +
             `• Reading and writing files\n` +
@@ -212,6 +217,7 @@ if (process.env.ENABLE_TELEGRAM === 'true') {
         .then(async () => {
           try {
             const botInfo = await bot.telegram.getMe();
+            telegramBotUsername = botInfo.username;
             console.log(`[Telegram] Bot started as @${botInfo.username}`);
           } catch (e) {
             console.log('[Telegram] Bot started (verified username unavailable)');
@@ -358,29 +364,54 @@ if (process.env.ENABLE_WHATSAPP === 'true') {
   }
 }
 
-// ─── HEALTH CHECK HTTP SERVER ───────────────────────────────
+// ─── EXPRESS.JS WEB SERVER ──────────────────────────────────
 
+const app = express();
 const port = process.env.PORT || 3000;
-const healthServer = http.createServer((req, res) => {
-  if (req.url === '/health' || req.url === '/') {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ 
-      status: 'healthy', 
-      uptime: process.uptime(),
-      channels: {
-        telegram: process.env.ENABLE_TELEGRAM === 'true',
-        discord: process.env.ENABLE_DISCORD === 'true',
-        whatsapp: process.env.ENABLE_WHATSAPP === 'true'
-      }
-    }));
-  } else {
-    res.writeHead(404);
-    res.end();
-  }
+
+// Enable CORS middleware
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
 });
 
-healthServer.listen(port, () => {
-  console.log(`\n🚀 Health check server listening on port ${port}`);
+// Serve static files from the public folder
+app.use(express.static(path.resolve('./public')));
+
+// Root landing page fallback
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve('./public/index.html'));
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'healthy', 
+    uptime: process.uptime(),
+    channels: {
+      telegram: process.env.ENABLE_TELEGRAM === 'true',
+      discord: process.env.ENABLE_DISCORD === 'true',
+      whatsapp: process.env.ENABLE_WHATSAPP === 'true'
+    }
+  });
+});
+
+// API status metadata endpoint
+app.get('/api/status', (req, res) => {
+  res.status(200).json({
+    status: 'healthy',
+    name: 'GojoClaw Autonomous AI Agent',
+    version: 'v1.0.0',
+    creator: 'Nathenael Ermias',
+    botLink: `https://t.me/${telegramBotUsername}`,
+    uptime: process.uptime()
+  });
+});
+
+// Start Express server
+app.listen(port, () => {
+  console.log(`\n🚀 Express Web server listening on port ${port}`);
 });
 
 process.on('SIGINT', () => {

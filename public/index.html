@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GojoClaw Autonomous AI Agent</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-radial"></div>
+    <div class="glass-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <span class="logo">🦞</span>
+            </div>
+            <h1 class="title">GojoClaw Autonomous AI Agent</h1>
+            <p class="subtitle">Built by <strong>Nathenael Ermias</strong></p>
+        </header>
+
+        <!-- Status Bar -->
+        <section class="status-bar">
+            <div class="status-badge">
+                <span class="status-dot online"></span>
+                <span class="status-text">SYSTEM ONLINE</span>
+            </div>
+            <div class="meta-info">
+                <span>Version: <strong>v1.0.0</strong></span>
+                <span class="separator">|</span>
+                <span>Last Updated: <strong>August 2026</strong></span>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- About Section -->
+            <section class="section about-section">
+                <h2>What is GojoClaw?</h2>
+                <p>GojoClaw is an advanced autonomous AI assistant built on the next-generation <strong>Google ADK 2.0 (Agent Development Kit)</strong> framework and powered by Gemini AI. It provides personal assistant capabilities natively across multiple messaging channels while maintaining full context memory.</p>
+            </section>
+
+            <!-- Features Grid -->
+            <section class="section features-section">
+                <h2>Capabilities & Tools</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">💻</span>
+                        <h3>Shell Access</h3>
+                        <p>Execute shell command lines securely in local environments with restricted fallback sandboxing in the cloud.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📁</span>
+                        <h3>File Operations</h3>
+                        <p>Read, write, list, and delete files. Automatically redirects to a secure writable sandbox on cloud systems.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🌐</span>
+                        <h3>Web Browsing</h3>
+                        <p>Retrieves web pages, filters out HTML tags, and reads documentation or web articles directly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📧</span>
+                        <h3>Email Summaries</h3>
+                        <p>Connects via Google OAuth2/credentials to list and summarize your unread Gmail messages.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">💬</span>
+                        <h3>Multi-Channel</h3>
+                        <p>Handles Telegram, Discord, and WhatsApp integrations concurrently with partitioned chat sessions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🧠</span>
+                        <h3>Persistent Memory</h3>
+                        <p>Saves conversation history to local JSON files so context is never lost during agent restarts.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tech Stack Section -->
+            <section class="section tech-section">
+                <h2>Technology Stack</h2>
+                <div class="tech-tags">
+                    <span class="tech-tag">Google ADK 2.0</span>
+                    <span class="tech-tag">Gemini Pro/Flash</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Express.js</span>
+                    <span class="tech-tag">Telegraf (Telegram)</span>
+                    <span class="tech-tag">Discord.js</span>
+                    <span class="tech-tag">WhatsApp Web JS</span>
+                </div>
+            </section>
+
+            <!-- CTA Links -->
+            <section class="cta-section">
+                <a href="https://t.me/GojoClawBot" target="_blank" class="btn btn-primary" id="telegram-link">
+                    <span>Chat on Telegram</span>
+                    <svg viewBox="0 0 24 24" class="btn-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.53-1.39.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.24.36-.49.99-.75 3.88-1.69 6.46-2.8 7.74-3.32 3.69-1.5 4.45-1.76 4.95-1.77.11 0 .36.03.52.16.13.1.17.24.19.34.02.13.02.26 0 .38z"/></svg>
+                </a>
+                <a href="https://github.com/NathenaelErmias/GojoClaw" target="_blank" class="btn btn-secondary">
+                    <span>GitHub Repository</span>
+                    <svg viewBox="0 0 24 24" class="btn-icon"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C19.138 20.193 22 16.44 22 12.017 22 6.484 17.522 2 12 2z"/></svg>
+                </a>
+                <a href="/health" class="btn btn-tertiary">
+                    <span>API Health Check</span>
+                </a>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Built by <strong>Nathenael Ermias</strong>. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Script to fetch bot info dynamically -->
+    <script>
+        fetch('/api/status')
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'healthy' && data.botLink) {
+                    document.getElementById('telegram-link').href = data.botLink;
+                }
+            })
+            .catch(err => console.log('Error fetching API status:', err));
+    </script>
+</body>
+</html>
