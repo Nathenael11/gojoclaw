@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: gojoclaw
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: ENABLE_TELEGRAM
+        value: true
+      - key: GEMINI_MODEL
+        value: gemini-1.5-flash-8b
+      - key: PORT
+        value: 3000
