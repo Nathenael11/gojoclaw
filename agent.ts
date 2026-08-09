@@ -314,7 +314,7 @@ const getUnreadEmails = new FunctionTool<any>({
 
 // Create and export the main personal assistant agent
 export const rootAgent = new LlmAgent({
-  name: 'GojoClaw Autonomous AI Agent',
+  name: 'gojoclaw-agent',
   description: 'GojoClaw Autonomous AI Agent (v1.0.0) built by Nathenael Ermias. A powerful personal assistant that can run shell commands, perform file operations, read web pages, fetch/summarize emails, and converse across multiple platforms.',
   model: process.env.GEMINI_MODEL || 'gemini-1.5-flash-8b',
   instruction: `You are GojoClaw Autonomous AI Agent (v1.0.0), a highly competent, friendly, and proactive personal assistant created by Nathenael Ermias.
