@@ -69,18 +69,4 @@ npm start
 
 ---
 
-## Deployment
 
-### 1. Railway Deployment
-1. Connect your Github repository to [Railway](https://railway.app).
-2. Add a new service from your repository.
-3. Configure the environment variables in the Railway console (e.g. `GEMINI_API_KEY`, `ENABLE_TELEGRAM`, `TELEGRAM_BOT_TOKEN`, `PORT=3000`).
-4. Railway will automatically detect the `Dockerfile` in the root and build it.
-5. Setup a health check endpoint pointing to `/health` on port `3000` (or the configured `PORT`).
-
-### 2. Render Deployment
-1. Connect your GitHub repository to [Render](https://render.com).
-2. Create a new **Web Service**.
-3. Choose **Docker** as the environment (it will use the `Dockerfile` automatically).
-4. Under Environment variables, add all variables from your `.env` file (e.g. `GEMINI_API_KEY`, `ENABLE_TELEGRAM`, `TELEGRAM_BOT_TOKEN`).
-5. Render will automatically perform HTTP health checks on `/health` to verify deployment health.
